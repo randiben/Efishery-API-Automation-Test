@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "25bc31e1-e9f3-48fc-b1da-447947bdfccc",
+		"name": "AIoT Test Engineer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22138016"
+	},
+	"item": [
+		{
+			"name": "Data Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check data type\", function () {\r",
+							"    // pm.expect(body.id).to.be.a(\"number\");\r",
+							"    typeof(body.postId) === Number;\r",
+							"    typeof(body.id) === Number;\r",
+							"    typeof(body.name) === String;\r",
+							"    typeof(body.email) === String;\r",
+							"    typeof(body.body) === String;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    // pm.expect(body.email).to.be.a('string');\r",
+							"    pm.expect(pm.response.json().name).to.be.a(\"String\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/comments",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correct Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"end-point get a correct response compare with the input data\", function () {\r",
+							"    pm.expect(pm.response.json().postId).to.eql(113);\r",
+							"    pm.expect(pm.response.json().name).to.eql(\"randi\");\r",
+							"    pm.expect(pm.response.json().email).to.eql(\"randi@efishery.com\");\r",
+							"    pm.expect(pm.response.json().body).to.eql(\"Hi this my api automation testing\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"postId\": 113,\r\n\"id\": 113,\r\n\"name\": \"randi\",\r\n\"email\": \"randi@efishery.com\",\r\n\"body\": \"Hi this my api automation testing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/comments",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
